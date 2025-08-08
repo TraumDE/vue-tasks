@@ -14,6 +14,12 @@ const addTask = (newTask: string): void => {
     done: false,
   })
 }
+
+const toggleTaskDone = (id: string): void => {
+  const task = tasks.value.find((task) => task.id === id)
+
+  if (task) task.done = !task.done
+}
 </script>
 
 <template>
@@ -23,7 +29,7 @@ const addTask = (newTask: string): void => {
     <h3 v-if="!tasks.length">Add task to get started</h3>
     <h3 v-else>x / {{ tasks.length }} tasks completed</h3>
     <!-- <h3>There are {{ tasks.length }} tasks</h3> -->
-    <tasks-list :tasks />
+    <tasks-list :tasks @toggle-done="toggleTaskDone" />
   </main>
 </template>
 
